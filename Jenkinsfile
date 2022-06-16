@@ -14,7 +14,7 @@ pipeline {
             steps {
                  //sh "./gradlew test assemble"
                     withGradle {
-                      sh "./gradlew test assemble check"
+                      sh "./gradlew test assemble check pitest"
                     }
             }
             post {
@@ -23,6 +23,7 @@ pipeline {
                     archiveArtifacts 'build/libs/*.jar'
                     jacoco()
                     recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
+                    recordIssues(tools: [pit(pattern: 'build/reports/pitest/*.xml')])
                 }
 
             }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class GreetingController {
 
-    final transient GreetingService service;
+    private final GreetingService service;
 
     public GreetingController(GreetingService service) {
         this.service = service;

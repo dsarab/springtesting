@@ -30,5 +30,14 @@ jacocoTestReport {
 	reports {
 		xml.required = true
 	}
+
+	pmd {
+		consoleOutput = true
+		toolVersion = "6.21.0"
+		rulesMinimumPriority = 5
+		ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+		ignoreFailures = true
+	}
+
 }
 

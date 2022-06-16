@@ -38,6 +38,7 @@ public class HttpRequestTest {
             "1.0, 1.0,  2.0",
             "1,    -2, -1.0",
             "1,  -1.0,  0.0",
+            "0,     2,  0.0",
             "1,    '',  1.0"
     })
     void canAddParameterized(String a, String b, String expected) {

@@ -1,7 +1,10 @@
 package com.example.springtesting;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -25,6 +28,25 @@ public class HttpRequestTest {
                 String.class)).contains("Hola, mundo");
     }
 
+    //Pruebas Parametrizadas
+
+    @DisplayName("multiple")
+    @ParameterizedTest(name="{displayName} [{index}] {0} + {1} = {2}")
+    @CsvSource({
+            "1,     2,  3.0",
+            "1,     1,  2.0",
+            "1.0, 1.0,  2.0",
+            "1,    -2, -1.0",
+            "1,  -1.0,  0.0",
+            "1,    '',  1.0"
+    })
+    void canAddParameterized(String a, String b, String expected) {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/add?a=" + a + "&b=" + b, String.class))
+                .isEqualTo(expected);
+    }
+
+
+    //Add
     @Test
     public void catAdd() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/add?a=1&b=2",

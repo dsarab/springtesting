@@ -16,6 +16,9 @@ public class HomeController {
           @RequestParam(value = "a", defaultValue = "0") Float a,
           @RequestParam(value = "b", defaultValue = "0") Float b
     ) {
+        if(a==0){
+            return a;
+        }
         return a+b;
     }
 
@@ -24,7 +27,7 @@ public class HomeController {
             @RequestParam(value = "a", defaultValue = "0") Float a,
             @RequestParam(value = "b", defaultValue = "0") Float b
     ) {
-        return a - b;
+        return a -b;
     }
 
     @GetMapping("/multiply")

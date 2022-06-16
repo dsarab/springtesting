@@ -60,4 +60,113 @@ public class HttpRequestTest {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/add?a=1&b=-2", String.class))
                 .isEqualTo("-1.0");
     }
+
+    //Substract
+    @Test
+    public void catSubstract() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/subtract?a=4&b=2", String.class))
+                .isEqualTo("2.0");
+    }
+
+    @Test
+    public void catSubstractPositeveNumbers() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/subtract?a=-1&b=2", String.class))
+                .isEqualTo("-3.0");
+    }
+
+    @Test
+    public void catSubstractWithMissingValue() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/subtract?a=1", String.class))
+                .isEqualTo("1.0");
+
+    }
+
+    @Test
+    public void catSubstractNegativeNumbers() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/subtract?a=-2&b=-4", String.class))
+                .isEqualTo("2.0");
+
+    }
+
+    @Test
+    public void catSubstractWithInvalidNumber() {
+        assertThat(this.restTemplate.getForEntity("http://localhost:" + port + "/subtract?a=1&b=X", String.class)
+                .getStatusCode().is4xxClientError()).isTrue();
+    }
+
+    @Test
+    public void catSubstractWithFractions() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/subtract?a=1.5&b=2", String.class))
+                .isEqualTo("-0.5");
+    }
+
+    //Multiply
+    @Test
+    public void catMultiply() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/multiply?a=4&b=2", String.class))
+                .isEqualTo("8.0");
+    }
+
+    @Test
+    public void catMultiplyWithMissingValue() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/multiply?a=1", String.class))
+                .isEqualTo("0.0");
+    }
+
+    @Test
+    public void catMultiplyNegativeNumbers() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/multiply?a=-2&b=-4", String.class))
+                .isEqualTo("8.0");
+
+    }
+
+    @Test
+    public void catMultiplyWithInvalidNumber() {
+        assertThat(this.restTemplate.getForEntity("http://localhost:" + port + "/multiply?a=1&b=X", String.class)
+                .getStatusCode().is4xxClientError()).isTrue();
+    }
+
+    @Test
+    public void ccatMultiplyWithFractions() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/divide?a=1.5&b=2", String.class))
+                .isEqualTo("0.75");
+    }
+
+    //Divide
+    @Test
+    public void catDivide() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/divide?a=4&b=2", String.class))
+                .isEqualTo("2.0");
+    }
+
+    @Test
+    public void catDivideWithMissingValue() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/divide?a=1", String.class))
+                .contains("Infinity");
+    }
+
+    @Test
+    public void catDivideNegativeNumbers() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/divide?a=-2&b=-4", String.class))
+                .isEqualTo("0.5");
+
+    }
+
+    @Test
+    public void catDivideWithInvalidNumber() {
+        assertThat(this.restTemplate.getForEntity("http://localhost:" + port + "/divide?a=1&b=X", String.class)
+                .getStatusCode().is4xxClientError()).isTrue();
+    }
+
+    @Test
+    public void catDivideWithZero() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/divide?a=2&b=0", String.class))
+                .contains("Infinity");
+    }
+
+    @Test
+    public void catDivideBetweenZeros() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/divide?a=0&b=0", String.class))
+                .contains("NaN");
+    }
 }

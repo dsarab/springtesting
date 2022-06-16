@@ -7,7 +7,6 @@ pipeline {
             timestamps ()
             disableConcurrentBuilds ()
             buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
-            jacoco()
         }
 
     stages {
@@ -22,7 +21,7 @@ pipeline {
                 success {
                     junit 'build/test-results/test/*.xml'
                     archiveArtifacts 'build/libs/*.jar'
-
+                    jacoco()
                 }
 
             }

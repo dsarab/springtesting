@@ -14,7 +14,7 @@ pipeline {
             steps {
                  //sh "./gradlew test assemble"
                     withGradle {
-                      sh "./gradlew test assemble"
+                      sh "./gradlew test assemble check"
                     }
             }
             post {

@@ -30,7 +30,7 @@ public class HomeController {
         return a - b;
     }
 
-    *@GetMapping("/multiply")
+    @GetMapping("/multiply")
     public Object multiply (
            @RequestParam(value = "a", defaultValue = "0") Float a,
                     @RequestParam(value = "b", defaultValue = "0") Float b

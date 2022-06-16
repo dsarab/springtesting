@@ -40,6 +40,7 @@ jacocoTestReport {
 		ignoreFailures = true
 	}
 	pitest {
+		junit5PluginVersion = '0.15'
 		targetClasses = ['com.example.springtesting.*']  //by default "${project.group}.*"
 		pitestVersion = '1.7.4' //not needed when a default PIT version should be used
 		threads = 4

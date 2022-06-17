@@ -31,6 +31,8 @@ jacocoTestReport {
 	reports {
 		xml.required = true
 	}
+}
+
 
 	pmd {
 		consoleOutput = true
@@ -39,6 +41,8 @@ jacocoTestReport {
 		ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
 		ignoreFailures = true
 	}
+
+
 	pitest {
 		junit5PluginVersion = '0.15'
 		targetClasses = ['com.example.springtesting.*']  //by default "${project.group}.*"
@@ -48,5 +52,5 @@ jacocoTestReport {
 		timestampedReports = false
 	}
 
-}
+
 

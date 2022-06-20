@@ -24,7 +24,7 @@ pipeline {
                     jacoco()
                     recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                     recordIssues(tools: [pit(pattern: 'build/reports/pitest/*.xml')])
-                }
+                                }
 
             }
             stage('SonarQube analysis') {

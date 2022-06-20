@@ -26,6 +26,7 @@ pipeline {
                     recordIssues(tools: [pit(pattern: 'build/reports/pitest/*.xml')])
                                 }
 
+
             }
             stage('SonarQube analysis') {
                 withSonarQubeEnv() {

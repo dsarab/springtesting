@@ -25,19 +25,9 @@ pipeline {
                     recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                     recordIssues(tools: [pit(pattern: 'build/reports/pitest/*.xml')])
                 }
+
             }
-
         }
-
-        stage('SonarQube analysis') {
-                      steps {
-                        withSonarQubeEnv('sonarqube') {
-                          sh './gradlew sonarqube'
-                        }
-                      }
-        }
-
-
         stage('Publish') {
              steps{
                 sshagent(['github-ssh']){

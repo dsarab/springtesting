@@ -55,7 +55,7 @@ pitest {
 
 sonarqube {
 	properties {
-
+		property "sonar.sourceEncoding", "UTF-8"
 	}
 }
 

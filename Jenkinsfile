@@ -14,7 +14,7 @@ pipeline {
             steps {
                  //sh "./gradlew test assemble"
                     withGradle {
-                      sh "./gradlew test assemble check pitest"
+                      sh "./gradlew test assemble check pitest sonarqube"
                     }
             }
             post {

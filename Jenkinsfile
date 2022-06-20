@@ -14,7 +14,7 @@ pipeline {
             steps {
                  //sh "./gradlew test assemble"
                     withGradle {
-                      sh "./gradlew test assemble check pitest sonarqube"
+                      sh "./gradlew test assemble check pitest"
                     }
             }
             post {
@@ -26,6 +26,11 @@ pipeline {
                     recordIssues(tools: [pit(pattern: 'build/reports/pitest/*.xml')])
                 }
 
+            }
+            stage('SonarQube analysis') {
+                withSonarQubeEnv() {
+                  sh './gradlew sonarqube'
+                }
             }
         }
         stage('Publish') {

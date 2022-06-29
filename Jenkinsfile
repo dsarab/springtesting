@@ -40,12 +40,11 @@ pipeline {
 
         stage('Publish') {
              steps{
-
                 withGradle {
                    withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
                     sh "./gradlew publish"
                    }
-
+                }
 
                 sshagent(['github-ssh2']){
                     sh 'git tag BUILD-1.0.${BUILD_NUMBER}'

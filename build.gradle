@@ -68,8 +68,8 @@ subprojects {
 				name = "GitHubPackages"
 				url = uri("https://maven.pkg.github.com/dsarab/springtesting")
 				credentials {
-					username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-					password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+					username = project.findProperty("gpr.user") ?: System.getenv("dsarab")
+					password = project.findProperty("gpr.key") ?: System.getenv("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")
 				}
 			}
 		}

@@ -33,7 +33,7 @@ pipeline {
         //}
 
         stage('Publish') {
-
+            steps{
             withGradle {
                                   withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
                                   sh "./gradlew test assemble check pitest publish"
@@ -41,7 +41,7 @@ pipeline {
                                 }
 
 
-             steps{
+
                 sshagent(['github-ssh2']){
                     sh 'git tag BUILD-1.0.${BUILD_NUMBER}'
                     sh 'git push --tags'

@@ -7,7 +7,7 @@ pipeline {
             timestamps ()
             disableConcurrentBuilds ()
             buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
-        }
+    }
 
     stages {
         stage('Build') {
@@ -25,16 +25,15 @@ pipeline {
                     recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                     recordIssues(tools: [pit(pattern: 'build/reports/pitest/*.xml')])
                 }
-
             }
         }
 
         stage('SonarQube analysis') {
-                              steps {
-                                withSonarQubeEnv('sonarqube') {
-                                  sh './gradlew sonarqube'
-                                }
-                              }
+             steps {
+                withSonarQubeEnv('sonarqube') {
+                     sh './gradlew sonarqube'
+                }
+             }
         }
 
         stage('Publish') {

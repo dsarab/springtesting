@@ -14,7 +14,7 @@ pipeline {
             steps {
                  //sh "./gradlew test assemble"
                     withGradle {
-                      withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
+                      withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'PASS', usernameVariable: 'USERNAME')]) {
                       sh "./gradlew test assemble check pitest publish"
                       }
                     }

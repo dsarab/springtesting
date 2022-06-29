@@ -12,11 +12,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 //sh "./gradlew test assemble"
-                    withGradle {
-                      withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
-                      sh "./gradlew test assemble check pitest publish"
-                      }
+                 sh "./gradlew test assemble"
+                    //withGradle {
+                      //withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
+                      //sh "./gradlew test assemble check pitest publish"
+                      //}
                     }
             }
             post {
@@ -40,6 +40,13 @@ pipeline {
 
         stage('Publish') {
              steps{
+
+                withGradle {
+                   withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
+                    sh "./gradlew publish"
+                   }
+
+
                 sshagent(['github-ssh2']){
                     sh 'git tag BUILD-1.0.${BUILD_NUMBER}'
                     sh 'git push --tags'

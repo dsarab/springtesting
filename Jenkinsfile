@@ -10,7 +10,6 @@ pipeline {
         stage('Build') {
             steps {
                  sh "./gradlew test assemble"
-
             }
             post {
                 success {

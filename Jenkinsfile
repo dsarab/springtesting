@@ -30,13 +30,13 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis') {
-             steps {
-                withSonarQubeEnv('sonarqube') {
-                     sh './gradlew sonarqube'
-                }
-             }
-        }
+        //stage('SonarQube analysis') {
+        //     steps {
+        //        withSonarQubeEnv('sonarqube') {
+        //             sh './gradlew sonarqube'
+        //        }
+        //     }
+        //}
 
         stage('Publish') {
              steps{

@@ -34,7 +34,7 @@ pipeline {
         stage('Publish') {
             steps{
                 withGradle {
-                    withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'git.token', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME'), usernamePassword(credentialsId: 'nexus', passwordVariable: 'TOKENN', usernameVariable: 'USERNAMEN')]) {
                         sh "./gradlew publish"
                     }
                 }

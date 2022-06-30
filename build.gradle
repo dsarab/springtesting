@@ -8,7 +8,9 @@ plugins {
 	id 'info.solidsoft.pitest' version '1.7.4'
 	id "org.sonarqube" version "3.4.0.2513"
 	id "maven-publish"
+
 }
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -17,6 +19,48 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
+
+publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/dsarab/springtesting")
+			credentials {
+				username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+				password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+			}
+		}
+
+		maven {
+			name = "GitHubPackages"
+			url = uri("http://localhost:9084/repository/prueba/")
+			allowInsecureProtocol = true
+			credentials {
+				username = project.findProperty("gpr.user") ?: System.getenv("USERNAMEN")
+				password = project.findProperty("gpr.key") ?: System.getenv("TOKENN")
+			}
+		}
+
+		//maven {
+		//	allowInsecureProtocol = true
+		//	credentials {
+		//		username "USERNAMEN"
+		//		password "TOKENN"
+		//	}
+		//	url "http://localhost:9084/repository/prueba/"
+		//}
+
+	}
+
+	publications {
+		mavenJava(MavenPublication) {
+			artifact bootJar
+		}
+	}
+
+}
+
+
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -37,21 +81,21 @@ jacocoTestReport {
 
 
 pmd {
-		consoleOutput = true
-		toolVersion = "6.21.0"
-		rulesMinimumPriority = 5
-		ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
-		ignoreFailures = true
+	consoleOutput = true
+	toolVersion = "6.21.0"
+	rulesMinimumPriority = 5
+	ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+	ignoreFailures = true
 }
 
 
 pitest {
-		junit5PluginVersion = '0.15'
-		targetClasses = ['com.example.springtesting.*'] //by default "${project.group}.*"
-		pitestVersion = '1.7.4' //not needed when a default PIT version should be used
-		threads = 4
-		outputFormats = ['XML', 'HTML']
-		timestampedReports = false
+	junit5PluginVersion = '0.15'
+	targetClasses = ['com.example.springtesting.*'] //by default "${project.group}.*"
+	pitestVersion = '1.7.4' //not needed when a default PIT version should be used
+	threads = 4
+	outputFormats = ['XML', 'HTML']
+	timestampedReports = false
 }
 
 sonarqube {
@@ -60,23 +104,12 @@ sonarqube {
 	}
 }
 
-publishing {
-	repositories {
-		maven {
-			name = "GitHubPackages"
-			url = uri("https://maven.pkg.github.com/dsarab/springtesting")
-			credentials {
-				username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-				password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-			}
-		}
-	}
-	publications {
-		gpr(MavenPublication) {
-			artifact bootJar
-		}
-	}
-}
+
+
+
+
+
+
 
 
 
